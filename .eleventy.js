@@ -33,6 +33,6 @@ module.exports = function (eleventyConfig) {
     markdownTemplateEngine: 'njk',
 
     // Only apply prefix when deployed on GitHub Pages
-    pathPrefix: isGithubPages ? "/gcds-ext-canada" : "",
+    pathPrefix: process.env.PATH_PREFIX ?? (isGithubPages ? "/gcds-ext-canada" : ""),
   };
 };
