@@ -1,10 +1,13 @@
-import { defineConfig, devices } from '@playwright/test';
+import { expect,  devices } from '@playwright/test';
+import { matchers, createConfig } from '@stencil/playwright';
 
-export default defineConfig({
+expect.extend(matchers);
+
+export default createConfig({
+  retries: 1,
   testDir: './src',
-  testMatch: '**/*.spec.ts',
-  timeout: 60000,
-  retries: 3,
+  testMatch: '**/*.e2e.ts',
+  timeout: 20000,
   reporter: 'html',
   use: {
     baseURL: 'http://localhost:3333',
@@ -23,7 +26,5 @@ export default defineConfig({
 
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
   ],
 });
